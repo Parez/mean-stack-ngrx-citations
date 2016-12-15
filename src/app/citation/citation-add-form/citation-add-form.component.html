@@ -1,0 +1,45 @@
+<div class="form-group">
+  <label for="citationText">Citation text</label>
+  <textarea
+    id="citationText"
+    class="form-control"
+    [(ngModel)]="model.text"
+    name="cText"
+    required
+    [minLength]="textMinLength"
+    [maxLength]="textMaxLength"
+    rows="3"
+    #cText="ngModel">
+            </textarea>
+
+  <div *ngIf="!cText.valid">
+    {{textError}}
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="citationAuthor">Name of the original author</label>
+  <input type="text"
+         id="citationAuthor"
+         class="form-control"
+         [(ngModel)]="model.author"
+         name="cAuthor"
+         #cAuthor="ngModel">
+
+  <label class="checkbox-inline">
+    <input type="checkbox" value="" name="cAuthorCheck" >
+    I am the author
+  </label>
+</div>
+
+<div class="form-group">
+  <label for="citationTags">Name of the original author</label>
+  <tag-input id="citationTags" [(ngModel)]="model.tags" name="cTags" #cTags="ngModel"
+             [placeholder]="options.placeholder"
+             [secondaryPlaceholder]="options.secondaryPlaceholder"
+             [maxItems]="options.maxItems"
+             [separatorKeys]="options.separatorKeys">
+  </tag-input>
+</div>
+
+<button type="submit" class="btn btn-primary" [disabled]="!cForm.valid">Add Citation</button>

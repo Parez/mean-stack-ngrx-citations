@@ -1,0 +1,30 @@
+.citation-text {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.likeBtn, .dislikeBtn {
+  min-width: 100px;
+}
+
+.rank-pill
+{
+  width: 100px;
+}
+
+.rank-count
+{
+  min-width: 40px;
+}
+
+.tags-block
+{
+  border-top: 1px solid #dedede;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.tags-block a
+{
+  margin-right: 6px;
+}

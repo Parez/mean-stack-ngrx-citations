@@ -1,0 +1,53 @@
+<div class="card card-outline-secondary" *ngIf="citation">
+
+  <div class="card-header">
+    <a [routerLink]="['/user', citation.publisher._id]" class="btn-link">{{citation.publisher.username}}</a>
+  </div>
+
+  <div class="card-block">
+    <div class="row">
+      <div class="col-md-1" aria-hidden="true">
+        <i class="fa fa-quote-left pull-left text-muted" aria-hidden="true"></i>
+      </div>
+      <div class="col-md-11"></div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <h5 class="col-md-10 citation-text">
+        {{citation.text | capitalizeFirstLetter}}
+      </h5>
+      <div class="col-md-1"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-11"></div>
+      <div class="col-md-1" aria-hidden="true">
+        <i class="fa fa-quote-right pull-right text-muted" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-block tags-block" *ngIf="citation.tags.length > 0">
+    <a *ngFor="let tag of citation.tags" [routerLink]="['/tag', tag]" class="list-inline-item btn-link">#{{tag}}</a>
+  </div>
+
+  <div class="card-footer">
+    <div class="row">
+
+      <div class="col-md-4">
+        <a href="#" class="btn-link card-text"><small class="text-muted">© {{citation.author}}</small></a>
+        <br>
+        <small class="text-muted">Views: {{citation.views}}</small>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+

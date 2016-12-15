@@ -1,0 +1,29 @@
+<nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
+  <div class="nav navbar-nav">
+    <div class="container">
+      <a [routerLink]="['/']" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <i class="fa fa-home"></i> Home
+      </a>
+      <a [routerLink]="['/profile']" class="nav-item nav-link" routerLinkActive="active">
+        <i class="fa"></i> Profile
+      </a>
+      <a class="nav-item nav-link pull-right" (click)="onRegisterOpen()">
+        <i class="fa"></i> Register
+      </a>
+
+      <div class="btn-group pull-right" *ngIf="loggedIn == false">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Registered? LogIn
+        </button>
+        <app-user-login-form class="dropdown-menu login-menu" (onLoggedIn)="onLogin($event)"></app-user-login-form>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="container app-cont">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <form class="card-block" (ngSubmit)="onSubmit(userLoginForm)" #userLoginForm>
+    <input type="text" class="form-control" id="inputUsername" placeholder="email"
+           [(ngModel)]="model.cred"
+           name="email"
+           #email="ngModel">
+
+    <input type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" placeholder="password"
+           [(ngModel)]="model.pass"
+           name="password"
+           #password="ngModel">
+    <button class="btn btn-primary" formaction="">Login</button>
+  </form>
+</div>

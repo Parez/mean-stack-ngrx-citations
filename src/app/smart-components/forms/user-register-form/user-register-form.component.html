@@ -1,0 +1,34 @@
+<div class="container-fluid card">
+  <form class="card-block" (ngSubmit)="onSubmit(userRegisterForm)" #userRegisterForm>
+    <div class="form-group">
+      <label for="inputUsername">Username</label>
+      <input type="text" class="form-control" id="inputUsername" aria-describedby="helpUsername" placeholder="Enter username"
+             [(ngModel)]="model.username"
+             name="username"
+             #username="ngModel">
+      <small id="helpUsername" class="form-text text-muted">Username should be unique</small>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail">Email address</label>
+      <input type="email" class="form-control" id="inputEmail" aria-describedby="helpEmail" placeholder="Enter email"
+             [(ngModel)]="model.email"
+             name="email"
+             #email="ngModel">
+      <small id="helpEmail" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword">Password</label>
+      <input type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" placeholder="Enter password"
+             [(ngModel)]="model.password"
+             name="password"
+             #password="ngModel">
+      <small id="passwordHelp" class="form-text text-muted">Create a password</small>
+    </div>
+    <div class="form-group">
+      <label for="inputRepeatPassword">Repeat password</label>
+      <input type="password" class="form-control" id="inputRepeatPassword" placeholder="Repeat password">
+      <small id="helpRepeatPassword" class="form-text text-muted"></small>
+    </div>
+    <button class="btn btn-primary" formaction="">Register</button>
+  </form>
+</div>

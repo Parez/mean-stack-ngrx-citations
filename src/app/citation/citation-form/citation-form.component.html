@@ -1,0 +1,16 @@
+<div>
+  <h1>Add new citation</h1>
+  <form (ngSubmit)="onSubmit(cForm)" [formGroup]="form">
+    <textarea formControlName="text" placeholder="Citation text"></textarea>
+
+    <div formGroupName="aothorGroup">
+      <input formControlName="author" placeholder="Original author of the citation">
+      <input type="checkbox" formControlName="iAmAuthor"> I am the author
+    </div>
+
+    <tag-input formControlName="tags"></tag-input>
+  </form>
+</div>
+<div>
+  <p>Form: {{form.value | json}}</p>
+</div>
