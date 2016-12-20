@@ -56,7 +56,7 @@ export class Citation extends CitationModel{
     Tag.addTags(citation.tags);
     return this.create(citation).then( (cit) => {
       //publish citation into all followers' feeds
-      Feed.publishCitation(cit._id, user.followers.map( (follower:IUser) => follower._id) );
+      Feed.publishCitation(cit._id, user.followers);
     }).catch( (err) => {
       console.log("Error while adding citation: "+err);
     });
@@ -77,6 +77,12 @@ export class Citation extends CitationModel{
     return this.find({'user._id': userId}).exec();
   }
 
+  static deleteCitation(id:string):Promise<ICitation>
+  {
+    Feed.deleteCitation(id);
+    return this.findByIdAndRemove(id).exec();
+  }
+
   static getLatestList(count = 10):Promise<ICitation[]>
   {
     return Citation.aggregate([
@@ -87,6 +93,7 @@ export class Citation extends CitationModel{
         limit: count
       }]).exec();
   }
+
 
   static modifyRank(citationId:string, userId:string, delta:RateType):Promise<number>
   {

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CitationComponent } from './citation.component';
 import {CitationService} from "../services/citation.service";
-import { CitationFormComponent } from './citation-form/citation-form.component';
+import { CitationFormComponent } from '../components/smart-components/forms/citation-form/citation-form.component';
 import {SharedModule} from "../shared/shared.module";
-import { CitationNavigationComponent } from './citation-navigation/citation-navigation.component';
+import { CitationNavigationComponent } from '../components/dumb-components/citation/citation-navigation.component';
 import { CitationListComponent } from './citation-list/citation-list.component';
 import { CitationAddFormComponent } from './citation-add-form/citation-add-form.component';
 

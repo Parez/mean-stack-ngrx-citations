@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken');
 import * as bcrypt from 'bcryptjs';
 import * as validator from 'validator';
 import * as _ from 'lodash';
+import {Feed} from './feed.logic';
+import {publish} from 'rxjs/operator/publish';
 
 const SECRET_KEY = '1A39Zhr6JN4J3i2xvnRbkGYuwCAl1H9Qfh6HEa8CiKRKR32mSSiQhQqn8ZNrsgQ';
 
@@ -13,7 +15,7 @@ export class User extends UserModel{
 
   private _document: IUser;
 
-  static createUserObj(username = '', password = '', email = '', name = '', followers:Array<IUser> = []):IUser
+  static createUserObj(username = '', password = '', email = '', name = '', followers:Array<string> = []):IUser
   {
     return <IUser>{
       username,
@@ -127,6 +129,17 @@ export class User extends UserModel{
     return User.find({_id: {$in: this._document.followers}}).exec();
   }
 
+  public static subscribe(subscriberId:string, publisherId:string):Promise<IUser>
+  {
+    Feed.initSubscription(subscriberId, publisherId);
+    return User.findByIdAndUpdate(publisherId, {$push: {followers: subscriberId}}, {new: true}).exec();
+  }
+
+  public static unsubscribe(subscriberId:string, publisherId:string):Promise<IUser>
+  {
+    Feed.removeSubscription(subscriberId, publisherId);
+    return User.findByIdAndUpdate(publisherId, {$pull: {followers: subscriberId}}, {new: true}).exec();
+  }
   /*
   static addNotification(userId: string, srcUserId: string, citationId: string, type: NotificationType): Promise <INotification> {
     return this.create({

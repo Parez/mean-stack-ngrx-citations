@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {HomeModule} from "./pages/home/home.module";
-import {ProfileModule} from "./pages/profile/profile.module";
+import {HomeModule} from "./components/smart-components/pages/home/home.module";
+import {ProfileModule} from "./components/smart-components/pages/profile/profile.module";
 import {SharedModule} from "./shared/shared.module";
 
 import { StoreModule } from "@ngrx/store";

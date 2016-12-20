@@ -6,6 +6,7 @@ export class Citation
 {
   //public static curId = 0;
   public _id:String = "";
+  public index:number = 0;
 
   constructor(public text:String = "",
               public author:String = "Unknown",

@@ -3,7 +3,7 @@ import 'rxjs/Rx';
 import {Observable} from 'rxjs/Rx';
 import {Http, Response, RequestOptions, Headers} from '@angular/http';
 import {Tag} from '../models/tag';
-import {handleError} from '../utils/handleErrors';
+import {handleError} from '../utils/error-handling';
 
 @Injectable()
 export class TagService {

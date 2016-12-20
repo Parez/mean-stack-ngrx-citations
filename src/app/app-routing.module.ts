@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomeComponent} from "./pages/home/home.component";
-import {ProfileComponent} from "./pages/profile/profile.component";
+import {HomeComponent} from "./components/smart-components/pages/home/home.component";
+import {ProfileComponent} from "./components/smart-components/pages/profile/profile.component";
 import {UserCitationsComponent} from "./user/user-citations/user-citations.component";
-import {UserInfoComponent} from "./user/user-info/user-info.component";
+import {UserInfoComponent} from "./components/dumb-components/user/user-info.component";
 import {UserFavouritesComponent} from "./user/user-favourites/user-favourites.component";
 import {UserViewHistoryComponent} from "./user/user-view-history/user-view-history.component";
 import {UserComponent} from "./user/user.component";

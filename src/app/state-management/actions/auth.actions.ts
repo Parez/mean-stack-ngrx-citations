@@ -7,37 +7,51 @@ import {RegisterCredentials} from '../../models/registerCredentials';
 import {User} from '../../models/user';
 
 export const ActionTypes = {
-  SIGN_IN: "SIGN_IN",
-  AUTH_SUCCESS: "AUTH_SUCCESS",
-  AUTH_FAILURE: "AUTH_FAILURE",
-  SIGN_OUT: "SIGN_OUT",
-  SIGN_UP: "SIGN_UP",
-  LOAD_USER: "LOAD_USER"
+  SIGN_IN: "[AUTH] SIGN_IN",
+  AUTH_SUCCESS: "[AUTH] AUTH_SUCCESS",
+  AUTH_FAILURE: "[AUTH] AUTH_FAILURE",
+  SIGN_OUT: "[AUTH] SIGN_OUT",
+  SIGN_UP: "[AUTH] SIGN_UP",
+  LOAD_USER: "[AUTH] LOAD_USER"
 };
 
 
-export const signIn = (creds:LoginCredentials):Action => ({
-  type: ActionTypes.SIGN_IN,
-  payload: creds
-});
+export class SignInAction implements Action {
+  type = ActionTypes.SIGN_IN;
+  constructor (public payload:LoginCredentials){}
+}
 
-export const authSuccess = (user:User):Action => ({
-  type: ActionTypes.SIGN_IN,
-  payload: user
-});
+export class AuthSuccessAction implements Action {
+  type = ActionTypes.AUTH_SUCCESS;
+  constructor (public payload:User){}
+}
 
-export const authFailure = (err:string):Action => ({
-  type: ActionTypes.SIGN_IN,
-  payload: err
-});
+export class AuthFailureAction implements Action {
+  type = ActionTypes.AUTH_FAILURE;
+  //string containing error message
+  constructor (public payload:string){}
+}
 
-export const signUp = (creds:RegisterCredentials):Action => ({
-  type: ActionTypes.SIGN_UP,
-  payload: creds
-});
+export class SignUpAction implements Action {
+  type = ActionTypes.SIGN_UP;
+  constructor (public payload:RegisterCredentials){}
+}
 
+export class SignOutAction implements Action {
+  type = ActionTypes.SIGN_OUT;
+  constructor (){}
+}
 
-export const loadUser = ():Action => ({
-  type: ActionTypes.LOAD_USER,
-  payload:{}
-});
+export class LoadUserAction implements Action {
+  type = ActionTypes.LOAD_USER;
+  constructor (){}
+}
+
+export type Actions
+  = SignInAction
+  | AuthSuccessAction
+  | AuthFailureAction
+  | SignUpAction
+  | LoadUserAction
+  | SignOutAction;
+

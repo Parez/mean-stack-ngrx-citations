@@ -15,6 +15,38 @@ router.get('/me', auth, (req: Request, res: Response) => {
   res.status(200).send(_.omit(user, 'password'));
 });
 
+//publisher's id
+router.post('/subscribe/:id', auth, (req: Request, res: Response) => {
+  let subscriberId:string = req.body.user._id; //
+  let publisherId:string = req.params.id; //на кого оформляется подписка
+
+  User.subscribe(subscriberId, publisherId).then( (user:IUser) => {
+    if(!user)
+    {
+      res.status(404).send(`Error: Publisher ${publisherId} not found`);
+    }
+    res.send((new User(user)).getInfo());
+  }).catch( (error) => {
+    res.status(400).send(error);
+  });
+});
+
+//publisher's id
+router.post('/unsubscribe/:id', auth, (req: Request, res: Response) => {
+  let subscriberId:string = req.body.user._id; //
+  let publisherId:string = req.params.id; //на кого оформляется подписка
+
+  User.subscribe(subscriberId, publisherId).then( (user:IUser) => {
+    if(!user)
+    {
+      res.status(404).send(`Error: Publisher ${publisherId} not found`);
+    }
+    res.send((new User(user)).getInfo());
+  }).catch( (error) => {
+    res.status(400).send(error);
+  });
+});
+
 //Get user by ID
 router.get('/:id', (req: Request, res: Response) => {
   let id = req.params.id;
@@ -67,6 +99,8 @@ router.post('/signup', (req: Request, res: Response) => {
     res.status(400).send(err);
   });
 });
+
+
 
 module.exports = router;
 

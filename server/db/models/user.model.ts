@@ -22,7 +22,7 @@ export interface IUser extends mongoose.Document {
   name: string;
   password: string;
   email: string;
-  followers: Array<IUser>; //will push all published citations to followers' feed
+  followers: Array<string>; //will push all published citations to followers' feed
   //tokens:Array<Object>;
 };
 

@@ -1,14 +1,31 @@
 /**
  * Created by baunov on 15/12/16.
  */
-import {initialState, AuthState} from "../states/auth.state"
 import * as auth from "../actions/auth.actions";
 import {Action} from '@ngrx/store';
 import {LoginCredentials} from '../../models/loginCredentials';
 import {User} from '../../models/user';
 import {RegisterCredentials} from '../../models/registerCredentials';
 
-export function reducer(state = initialState, action: Action): AuthState {
+
+export interface State {
+  processing: boolean,
+  loggedIn: boolean,
+  token: string,
+  user: User,
+  error: string
+}
+
+export const initialState: State = {
+  processing: false,
+  loggedIn: false,
+  token: "",
+  user: null,
+  error: ""
+};
+
+
+export function reducer(state = initialState, action: Action): State {
   switch (action.type) {
     case auth.ActionTypes.SIGN_IN: {
       const creds:LoginCredentials = action.payload as LoginCredentials;
@@ -38,7 +55,7 @@ export function reducer(state = initialState, action: Action): AuthState {
 
       return Object.assign({}, state, {
         processing: false,
-        loggedIn: true,
+        loggedIn: false,
         user: null,
         error: err
       });

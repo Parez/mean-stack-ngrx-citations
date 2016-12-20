@@ -7,6 +7,7 @@
 
 import {FeedModel, IFeed} from '../models/feed.model';
 import {ICitation} from '../models/citation.model';
+import {Citation} from './citation.logic';
 
 export class Feed extends FeedModel{
 
@@ -38,15 +39,51 @@ export class Feed extends FeedModel{
     ).exec();
   }
 
-  static publishCitation(citationId:string, userIds:Array<string>):Promise<IFeed[]>
+  //publish all citations by user(userId) into subscriber's feed
+  static initSubscription(subscriberId: string, userId: string):Promise<IFeed>
+  {
+    let date:Date = new Date();
+    let months:Number = date.getFullYear()*12 + date.getMonth();
+    return Citation.getByUser(userId).then( (citations:ICitation[]) => {
+      let citIds:string[] = citations.map(cit => cit._id);
+      return this.update(
+        {user: subscriberId, month: months},
+        {$push: {citations: citIds}},
+        {upsert: true, new : true}
+      )
+    });
+  }
+
+  static removeSubscription(subscriberId: string, userId: string):Promise<IFeed>
+  {
+    return Citation.getByUser(userId).then( (citations:ICitation[]) => {
+      let citIds:string[] = citations.map(cit => cit._id);
+      return this.update(
+        {user: subscriberId},
+        {$pull: {citations: citIds}},
+        {new : true, multi: true}
+      )
+    });
+  }
+
+  static publishCitation(citationId:string, subscriberIds:Array<string>):Promise<IFeed[]>
   {
     //put (link) new citation into every followers' feed
     let date:Date = new Date();
     let months:Number = date.getFullYear()*12 + date.getMonth();
     return this.update(
-      { user: { $in: userIds }, month: months },
-      {$push: {'citations': citationId}},
+      { user: { $in: subscriberIds }, month: months },
+      {$push: {citations: citationId}},
       {multi: true, upsert: true, new : true}
+    ).exec();
+  }
+
+  static deleteCitation(citationId:string):Promise<IFeed[]>
+  {
+    return this.update(
+      { citations: citationId },
+      { $pull: { citations: citationId } },
+      {multi: true, new : true}
     ).exec();
   }
 

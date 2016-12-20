@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CitationNavigationComponent } from './citation-navigation.component';
+import { CitationNavigationComponent } from '../../components/dumb-components/citation/citation-navigation.component';
 
 describe('CitationNavigationComponent', () => {
   let component: CitationNavigationComponent;

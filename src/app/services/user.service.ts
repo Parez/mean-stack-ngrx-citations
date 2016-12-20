@@ -96,9 +96,9 @@ export class UserService {
 
   getUserById(id:String):Observable<User>
   {
-    return this.http.get(this.usersUrl+id)
-      .map(res => res.json())
-      .catch(this.handleError);
+    return this.http.get(this.usersUrl+id).map((response: Response) => {
+      return response.json() as User;
+    });
     //return new Observable<User>(observer => observer.next(UserService.db.getById(id)));
     /**/
   }
